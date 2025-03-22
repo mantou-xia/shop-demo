@@ -1,42 +1,28 @@
 <template>
-  <el-container>
-    <el-header>Header</el-header>
-    <el-main>Main</el-main>
-    <el-footer>Footer</el-footer>
-  </el-container>
+  <div id="view-container">
+    <router-view></router-view>
+  </div>
 </template>
 
-<script>
+<script></script>
 
-</script>
-
-<!-- 全局样式 -->
-<style>
-/* 全局样式需要单独声明 */
+<style scoped lang="scss">
 body,
 html {
-  height: 100%;
   margin: 0;
-}
-</style>
-<style scoped lang="scss">
-
-.el-header,
-.el-footer {
-  background-color: #B3C0D1;
-  color: #333;
-  text-align: center;
-  line-height: 60px;
+  padding: 0;
+  width: 100%;
+  height: 100%;
 }
 
-.el-main {
-  background-color: #E9EEF3;
-  color: #333;
-  text-align: center;
-  line-height: 160px;
-}
+#view-container {
+  min-height: 100vh;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
-body>.el-container {
-  margin-bottom: 40px;
+  background-color: #ecf0f3;
 }
 </style>
