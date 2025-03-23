@@ -1,15 +1,15 @@
 <template>
-    <div class="sub-nav-container">
-        <ul>
-            <li><a href="#">种类1</a></li>
-            <li><a href="#">种类2</a></li>
-            <li><a href="#">种类3</a></li>
-            <li><a href="#">种类4</a></li>
-            <li><a href="#">种类5</a></li>
-            <li><a href="#">种类6</a></li>
-            <div class="nav-box"></div>
-        </ul>
-    </div>
+  <div class="sub-nav-container">
+    <ul>
+      <li><a href="#">种类1</a></li>
+      <li><a href="#">种类2</a></li>
+      <li><a href="#">种类3</a></li>
+      <li><a href="#">种类4</a></li>
+      <li><a href="#">种类5</a></li>
+      <li><a href="#">种类6</a></li>
+      <div class="nav-box" />
+    </ul>
+  </div>
 </template>
 
 <style lang="scss" scoped>
@@ -17,7 +17,7 @@ ul,li{
     list-style: none;
     margin: 0;
     padding: 0;
-    box-sizing: border-box;  
+    box-sizing: border-box;
 }
 /* 删除 body 样式 */
 .sub-nav-container {

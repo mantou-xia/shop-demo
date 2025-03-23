@@ -1,59 +1,133 @@
 <template>
   <div class="shell">
-    <div class="container a-container" id="a-container" ref="aContainer">
-      <form action="" method="" class="form" id="a-form">
-        <h2 class="form_title title">创建账号</h2>
+    <div
+      id="a-container"
+      ref="aContainer"
+      class="container a-container"
+    >
+      <form
+        id="a-form"
+        action=""
+        method=""
+        class="form"
+      >
+        <h2 class="form_title title">
+          创建账号
+        </h2>
         <div class="form_icons">
-          <i class="iconfont icon-QQ"></i>
-          <i class="iconfont icon-weixin"></i>
-          <i class="iconfont icon-bilibili-line"></i>
+          <i class="iconfont icon-QQ" />
+          <i class="iconfont icon-weixin" />
+          <i class="iconfont icon-bilibili-line" />
         </div>
         <span class="form_span">选择注册方式活电子邮箱注册</span>
-        <input type="text" class="form_input" placeholder="Name" />
-        <input type="text" class="form_input" placeholder="Email" />
-        <input type="text" class="form_input" placeholder="Password" />
-        <button class="form_button button submit">Sign Up</button>
+        <input
+          type="text"
+          class="form_input"
+          placeholder="Name"
+        >
+        <input
+          type="text"
+          class="form_input"
+          placeholder="Email"
+        >
+        <input
+          type="text"
+          class="form_input"
+          placeholder="Password"
+        >
+        <button class="form_button button submit">
+          Sign Up
+        </button>
       </form>
     </div>
 
-    <div class="container b-container" id="b-container" ref="bContainer">
-      <form action="" method="" class="form" id="b-form">
-        <h2 class="form_title title">Login</h2>
+    <div
+      id="b-container"
+      ref="bContainer"
+      class="container b-container"
+    >
+      <form
+        id="b-form"
+        action=""
+        method=""
+        class="form"
+      >
+        <h2 class="form_title title">
+          Login
+        </h2>
         <div class="form_icons">
-          <i class="iconfont icon-QQ"></i>
-          <i class="iconfont icon-weixin"></i>
-          <i class="iconfont icon-bilibili-line"></i>
+          <i class="iconfont icon-QQ" />
+          <i class="iconfont icon-weixin" />
+          <i class="iconfont icon-bilibili-line" />
         </div>
         <span class="form_span">选择登录方式活电子邮箱登录</span>
-        <input type="text" class="form_input" placeholder="Email" />
-        <input type="text" class="form_input" placeholder="Password" />
+        <input
+          type="text"
+          class="form_input"
+          placeholder="Email"
+        >
+        <input
+          type="text"
+          class="form_input"
+          placeholder="Password"
+        >
         <a class="form_link">忘记密码？</a>
-        <button class="form_button button submit">SIGN IN</button>
+        <button class="form_button button submit">
+          SIGN IN
+        </button>
       </form>
     </div>
 
     <!-- Add missing refs for switch elements -->
-    <div class="switch" id="switch-cnt" ref="switchCtn">
-      <div class="switch_circle" ref="switchCircle1"></div>
-      <div class="switch_circle switch_circle-t" ref="switchCircle2"></div>
-      <div class="switch_container" id="switch-c1" ref="switchC1">
-        <h2 class="switch_title title" style="letter-spacing: 0">
+    <div
+      id="switch-cnt"
+      ref="switchCtn"
+      class="switch"
+    >
+      <div
+        ref="switchCircle1"
+        class="switch_circle"
+      />
+      <div
+        ref="switchCircle2"
+        class="switch_circle switch_circle-t"
+      />
+      <div
+        id="switch-c1"
+        ref="switchC1"
+        class="switch_container"
+      >
+        <h2
+          class="switch_title title"
+          style="letter-spacing: 0"
+        >
           Welcome Back！
         </h2>
         <p class="switch_description description">
           已经有账号了嘛，去登入账号来进入奇妙世界吧！！！
         </p>
-        <button class="switch_button button switch-btn">To Login</button>
+        <button class="switch_button button switch-btn">
+          To Login
+        </button>
       </div>
 
-      <div class="switch_container is-hidden" id="switch-c2" ref="switchC2">
-        <h2 class="switch_title title" style="letter-spacing: 0">
+      <div
+        id="switch-c2"
+        ref="switchC2"
+        class="switch_container is-hidden"
+      >
+        <h2
+          class="switch_title title"
+          style="letter-spacing: 0"
+        >
           Hello Friend！
         </h2>
         <p class="switch_description description">
           去注册一个账号，成为尊贵的粉丝会员，让我们踏入奇妙的旅途！
         </p>
-        <button class="switch_button button switch-btn">To Reg</button>
+        <button class="switch_button button switch-btn">
+          To Reg
+        </button>
       </div>
     </div>
   </div>
@@ -61,45 +135,45 @@
 
 <script lang="js">
 export default {
-  name:'front-component',
-  mounted() {
-    this.initEventListeners();
+  name: 'FrontComponent',
+  mounted () {
+    this.initEventListeners()
   },
   methods: {
-    getButtons(e) {
-      e.preventDefault();
+    getButtons (e) {
+      e.preventDefault()
     },
-    changeForm() {
+    changeForm () {
       // 修改类名
-      this.$refs.switchCtn.classList.add("is-gx");
+      this.$refs.switchCtn.classList.add('is-gx')
       setTimeout(() => {
-        this.$refs.switchCtn.classList.remove("is-gx");
-      }, 1500);
-      this.$refs.switchCtn.classList.toggle("is-txr");
+        this.$refs.switchCtn.classList.remove('is-gx')
+      }, 1500)
+      this.$refs.switchCtn.classList.toggle('is-txr');
 
       // 修改为数组遍历
       [this.$refs.switchCircle1, this.$refs.switchCircle2].forEach((circle) => {
-        circle.classList.toggle("is-txr");
-      });
-      this.$refs.switchC1.classList.toggle("is-hidden");
-      this.$refs.switchC2.classList.toggle("is-hidden");
-      this.$refs.aContainer.classList.toggle("is-txl");
-      this.$refs.bContainer.classList.toggle("is-txl");
-      this.$refs.bContainer.classList.toggle("is-z");
+        circle.classList.toggle('is-txr')
+      })
+      this.$refs.switchC1.classList.toggle('is-hidden')
+      this.$refs.switchC2.classList.toggle('is-hidden')
+      this.$refs.aContainer.classList.toggle('is-txl')
+      this.$refs.bContainer.classList.toggle('is-txl')
+      this.$refs.bContainer.classList.toggle('is-z')
     },
-    initEventListeners() {
-      const allButtons = this.$el.querySelectorAll(".submit");
-      const switchBtn = this.$el.querySelectorAll(".switch-btn");
+    initEventListeners () {
+      const allButtons = this.$el.querySelectorAll('.submit')
+      const switchBtn = this.$el.querySelectorAll('.switch-btn')
 
       allButtons.forEach((button) => {
-        button.addEventListener("click", this.getButtons);
-      });
+        button.addEventListener('click', this.getButtons)
+      })
       switchBtn.forEach((button) => {
-        button.addEventListener("click", this.changeForm);
-      });
-    },
-  },
-};
+        button.addEventListener('click', this.changeForm)
+      })
+    }
+  }
+}
 </script>
 <style scoped>
 @font-face {
