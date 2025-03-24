@@ -10,7 +10,9 @@
         <div class="user-detail">
           <h2>张三</h2>
           <div class="vip-info">
-            <el-tag type="warning">金牌会员</el-tag>
+            <el-tag type="warning">
+              金牌会员
+            </el-tag>
             <span class="points">积分：3580</span>
           </div>
         </div>
@@ -22,7 +24,12 @@
       <template #header>
         <div class="card-header">
           <span>我的订单</span>
-          <el-link type="primary" :underline="false">查看全部订单 ></el-link>
+          <el-link
+            type="primary"
+            :underline="false"
+          >
+            查看全部订单 >
+          </el-link>
         </div>
       </template>
       <el-row :gutter="20">
@@ -30,11 +37,16 @@
           v-for="(item, index) in orderStatus"
           :key="index"
           :span="4"
-          @click="handleOrderClick(item.type)"
           class="order-item"
+          @click="handleOrderClick(item.type)"
         >
-          <el-badge :value="item.count" :max="99">
-            <el-icon :size="30"><component :is="item.icon" /></el-icon>
+          <el-badge
+            :value="item.count"
+            :max="99"
+          >
+            <el-icon :size="30">
+              <component :is="item.icon" />
+            </el-icon>
           </el-badge>
           <p>{{ item.title }}</p>
         </el-col>
@@ -51,7 +63,9 @@
           @click="handleModuleClick(module.path)"
         >
           <div class="function-item">
-            <el-icon :size="24"><component :is="module.icon" /></el-icon>
+            <el-icon :size="24">
+              <component :is="module.icon" />
+            </el-icon>
             <span>{{ module.title }}</span>
           </div>
         </el-col>

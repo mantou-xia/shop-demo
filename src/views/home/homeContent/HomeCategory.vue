@@ -2,34 +2,34 @@
   <div class="container">
     <el-row :gutter="20">
       <el-col :span="4">
-        <!-- 添加搜索框 -->
-        <el-input
-          v-model="searchKeyword"
-          placeholder="搜索商品分类"
-          clearable
-          class="search-input"
-          @keyup.enter="handleSearch"
-        >
-          <template #prefix>
-            <el-icon><search /></el-icon>
-          </template>
-        </el-input>
-
+        <!-- 删除整个el-input组件 -->
         <el-menu
           class="mi-menu"
           default-active="1"
           mode="vertical"
-          @select="handleSelect"
           :background-color="menuBackground"
           :text-color="menuText"
           :active-text-color="activeColor"
+          @select="handleSelect"
         >
-          <el-menu-item index="1">种类1</el-menu-item>
-          <el-menu-item index="2">种类2</el-menu-item>
-          <el-menu-item index="3">种类3</el-menu-item>
-          <el-menu-item index="4">种类4</el-menu-item>
-          <el-menu-item index="5">种类5</el-menu-item>
-          <el-menu-item index="6">种类6</el-menu-item>
+          <el-menu-item index="1">
+            种类1
+          </el-menu-item>
+          <el-menu-item index="2">
+            种类2
+          </el-menu-item>
+          <el-menu-item index="3">
+            种类3
+          </el-menu-item>
+          <el-menu-item index="4">
+            种类4
+          </el-menu-item>
+          <el-menu-item index="5">
+            种类5
+          </el-menu-item>
+          <el-menu-item index="6">
+            种类6
+          </el-menu-item>
         </el-menu>
       </el-col>
 
@@ -56,8 +56,12 @@
                   <span class="promo-tag">新品</span>
                 </div>
                 <div class="goods-info">
-                  <h4 class="goods-title">商品 {{ item }}</h4>
-                  <p class="goods-desc">高端旗舰 年度新品</p>
+                  <h4 class="goods-title">
+                    商品 {{ item }}
+                  </h4>
+                  <p class="goods-desc">
+                    高端旗舰 年度新品
+                  </p>
                   <div class="price-section">
                     <span class="current-price">¥{{ 1999 + item }}</span>
                     <del class="original-price">¥{{ 2999 + item }}</del>
@@ -79,18 +83,10 @@ import {
   ElCol,
   ElMenu,
   ElMenuItem,
-  ElImage,
-  ElInput,
-  ElIcon
+  ElImage
 } from 'element-plus'
-import { Search } from '@element-plus/icons-vue'
 
-// 新增搜索相关逻辑
-const searchKeyword = ref('')
-const handleSearch = () => {
-  console.log('搜索关键词:', searchKeyword.value)
-  // 这里可以添加搜索逻辑
-}
+// 删除searchKeyword和handleSearch相关代码
 
 // 小米主题色
 const menuBackground = ref('#ffffff')
@@ -105,15 +101,18 @@ const handleSelect = (key) => {
 <style lang="scss" scoped>
 .container {
   .mi-menu {
-    margin-top: 15px; // 增加与搜索框的间距
+    /* 删除原搜索框的margin-top */
     border-right: none;
+
     :deep(.el-menu-item) {
       height: 50px;
       line-height: 50px;
       font-size: 14px;
+
       &.is-active {
         background-color: #fff5f0 !important;
       }
+
       &:hover {
         background-color: #fff5f0;
       }
@@ -141,10 +140,12 @@ const handleSelect = (key) => {
       .image-container {
         position: relative;
         height: 300px;
+
         .goods-image {
           width: 100%;
           height: 100%;
         }
+
         .promo-tag {
           position: absolute;
           top: 10px;
@@ -159,22 +160,26 @@ const handleSelect = (key) => {
 
       .goods-info {
         padding: 15px;
+
         .goods-title {
           margin: 0 0 8px;
           font-size: 16px;
           color: #333;
         }
+
         .goods-desc {
           font-size: 12px;
           color: #999;
           margin-bottom: 12px;
         }
+
         .price-section {
           .current-price {
             color: #ff6700;
             font-size: 18px;
             margin-right: 8px;
           }
+
           .original-price {
             color: #999;
             font-size: 12px;
@@ -184,5 +189,20 @@ const handleSelect = (key) => {
     }
   }
 }
+
+.search-input {
+  :deep(.el-input__prefix) {
+    // 确保图标容器可见
+    display: flex;
+    align-items: center;
+    // 修复可能被隐藏的情况
+    overflow: visible;
+
+    .el-icon {
+      // 确保图标尺寸
+      width: 1em;
+      height: 1em;
+    }
+  }
+}
 </style>
-<!-- 在文件末尾添加空行 -->

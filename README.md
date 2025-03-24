@@ -36,6 +36,8 @@ git add .
 git commit -m "注释"
 
 git push
+
+cnpm run lint -- --fix
 ```
 # 该项目插入了element-ui、vant、axios、vue-router、naive-ui、pinia、naive-ui
 
