@@ -35,7 +35,7 @@ git add .
 
 git commit -m "注释"
 
-git pull
+git push
 ```
 # 该项目插入了element-ui、vant、axios、vue-router、naive-ui、pinia、naive-ui
 
