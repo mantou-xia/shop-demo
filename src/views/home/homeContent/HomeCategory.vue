@@ -2,7 +2,8 @@
   <div class="container">
     <el-row :gutter="20">
       <el-col :span="4">
-        <!-- 删除整个el-input组件 -->
+        <!-- 搜索框 -->
+        <SearchInput @search="handleSearch" />
         <el-menu
           class="mi-menu"
           default-active="1"
@@ -85,8 +86,8 @@ import {
   ElMenuItem,
   ElImage
 } from 'element-plus'
-
-// 删除searchKeyword和handleSearch相关代码
+import SearchInput from '../../../components/SearchInput.vue'
+// vue3 中的 setup 语法糖不需要注册组件
 
 // 小米主题色
 const menuBackground = ref('#ffffff')
@@ -96,12 +97,15 @@ const activeColor = ref('#ff6700')
 const handleSelect = (key) => {
   console.log('选中分类:', key)
 }
+
+const handleSearch = (data) => {
+  console.log('收到搜索关键词:', data)
+}
 </script>
 
 <style lang="scss" scoped>
 .container {
   .mi-menu {
-    /* 删除原搜索框的margin-top */
     border-right: none;
 
     :deep(.el-menu-item) {
@@ -186,22 +190,6 @@ const handleSelect = (key) => {
           }
         }
       }
-    }
-  }
-}
-
-.search-input {
-  :deep(.el-input__prefix) {
-    // 确保图标容器可见
-    display: flex;
-    align-items: center;
-    // 修复可能被隐藏的情况
-    overflow: visible;
-
-    .el-icon {
-      // 确保图标尺寸
-      width: 1em;
-      height: 1em;
     }
   }
 }

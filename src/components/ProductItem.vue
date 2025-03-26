@@ -1,27 +1,14 @@
 <template>
-  <el-col
-    :xs="24"
-    :sm="12"
-    :md="8"
-    :lg="6"
-    class="product-item"
-  >
+  <el-col :xs="24" :sm="12" :md="8" :lg="6" class="product-item">
     <el-card class="product-card">
-      <img
-        :src="product.image"
-        class="product-image"
-      >
+      <img :src="product.image" class="product-image">
       <h3 class="product-title">
         {{ product.name }}
       </h3>
       <p class="product-price">
         ¥ {{ product.price }}
       </p>
-      <el-button
-        type="primary"
-        class="add-to-cart"
-        @click="$emit('add-to-cart', product)"
-      >
+      <el-button type="primary" class="add-to-cart" @click="$emit('add-to-cart', product)">
         加入购物车
       </el-button>
     </el-card>
@@ -48,12 +35,15 @@ defineProps({
     min-width: 120px;
   }
 }
+
 .product-card {
   margin-bottom: 20px;
   transition: transform 0.3s;
+
   :deep(.el-card__body) {
     padding: 15px;
   }
+
   &:hover {
     transform: translateY(-5px);
   }
