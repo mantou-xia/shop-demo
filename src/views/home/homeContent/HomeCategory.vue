@@ -5,14 +5,8 @@
         <!-- 搜索框 -->
         <SearchInput @search="handleSearch" />
         <el-menu
-          class="mi-menu"
-          default-active="1"
-          mode="vertical"
-          :background-color="menuBackground"
-          :text-color="menuText"
-          :active-text-color="activeColor"
-          @select="handleSelect"
-        >
+class="mi-menu" default-active="1" mode="vertical" :background-color="menuBackground"
+          :text-color="menuText" :active-text-color="activeColor" @select="handleSelect">
           <el-menu-item index="1">
             种类1
           </el-menu-item>
@@ -39,36 +33,16 @@
         <!-- 商品展示区 -->
         <div class="goods-showcase">
           <el-row :gutter="20">
-            <el-col
-              v-for="item in 8"
-              :key="item"
-              :xs="12"
-              :sm="8"
-              :md="6"
-              class="goods-item"
-            >
-              <div class="mi-goods-card">
-                <div class="image-container">
-                  <el-image
-                    src="https://via.placeholder.com/300x300"
-                    fit="cover"
-                    class="goods-image"
-                  />
-                  <span class="promo-tag">新品</span>
-                </div>
-                <div class="goods-info">
-                  <h4 class="goods-title">
-                    商品 {{ item }}
-                  </h4>
-                  <p class="goods-desc">
-                    高端旗舰 年度新品
-                  </p>
-                  <div class="price-section">
-                    <span class="current-price">¥{{ 1999 + item }}</span>
-                    <del class="original-price">¥{{ 2999 + item }}</del>
-                  </div>
-                </div>
-              </div>
+            <el-col v-for="item in 8" :key="item" :xs="12" :sm="8" :md="6" class="goods-item">
+              <GoodsItem
+:item-data="{
+      image: `https://picsum.photos/1200/300?random=${item}`,
+      title: `商品 ${item}`,
+      desc: '高端旗舰 年度新品',
+      currentPrice: 1999 + item,
+      originalPrice: 2999 + item,
+      promoTag: '新品'
+    }" />
             </el-col>
           </el-row>
         </div>
@@ -83,10 +57,10 @@ import {
   ElRow,
   ElCol,
   ElMenu,
-  ElMenuItem,
-  ElImage
+  ElMenuItem
 } from 'element-plus'
 import SearchInput from '../../../components/SearchInput.vue'
+import GoodsItem from '../../../components/goodsItem/GoodsItem.vue'
 // vue3 中的 setup 语法糖不需要注册组件
 
 // 小米主题色
@@ -127,70 +101,6 @@ const handleSearch = (data) => {
     padding: 20px;
     background: white;
     border-radius: 8px;
-
-    .mi-goods-card {
-      margin-bottom: 20px;
-      background: white;
-      border-radius: 8px;
-      overflow: hidden;
-      transition: all 0.3s;
-      cursor: pointer;
-
-      &:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-      }
-
-      .image-container {
-        position: relative;
-        height: 300px;
-
-        .goods-image {
-          width: 100%;
-          height: 100%;
-        }
-
-        .promo-tag {
-          position: absolute;
-          top: 10px;
-          left: 10px;
-          background: #ff6700;
-          color: white;
-          padding: 2px 8px;
-          border-radius: 3px;
-          font-size: 12px;
-        }
-      }
-
-      .goods-info {
-        padding: 15px;
-
-        .goods-title {
-          margin: 0 0 8px;
-          font-size: 16px;
-          color: #333;
-        }
-
-        .goods-desc {
-          font-size: 12px;
-          color: #999;
-          margin-bottom: 12px;
-        }
-
-        .price-section {
-          .current-price {
-            color: #ff6700;
-            font-size: 18px;
-            margin-right: 8px;
-          }
-
-          .original-price {
-            color: #999;
-            font-size: 12px;
-          }
-        }
-      }
-    }
   }
 }
 </style>

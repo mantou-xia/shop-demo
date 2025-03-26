@@ -1,7 +1,8 @@
 <template>
     <div class="search-container">
         <span class="iconfont icon-sousuo"></span>
-        <el-input v-model="keyword" class="search-input" placeholder="搜索商品" :prefix-icon="Search" clearable
+        <el-input
+v-model="keyword" class="search-input" placeholder="搜索商品" :prefix-icon="Search" clearable
             @input="handleSearch" @keyup.enter="handleSearch" />
     </div>
 </template>
