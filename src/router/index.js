@@ -33,6 +33,17 @@ const routes = [
     path: '/loginAndReg',
     name: 'loginAndReg',
     component: () => import('../views/loginAndReg/LoginAndRegView.vue')
+  },
+  {
+    path: '/orders/:type', // 动态路由参数
+    name: 'OrderStatus',
+    component: () => import('../views/user/OrderStatus.vue'),
+    props: true // 自动将参数传递给组件的 props
+  },
+  {
+    path: '/404', // 动态路由参数
+    name: 'error',
+    component: () => import('../views/error/Error.vue'), 
   }
 ]
 
