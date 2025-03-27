@@ -21,19 +21,20 @@ module.exports = {
   },
   rules: {
     "vue/multi-word-component-names": "off",
+    "no-unused-vars": ["error", { argsIgnorePattern: "^props$" }],
   },
   overrides: [
     {
-      files: ['src/assets/font/iconfont.js'],
+      files: ["src/assets/font/iconfont.js"],
       rules: {
-        'no-unused-expressions': 'off',
-        'no-sequences': 'off',
-        'no-use-before-define': 'off',
-        'no-var': 'off',
-        'no-self-assign': 'off',
-        'eqeqeq': 'off',
-        'no-void': 'off'
-      }
-    }
+        "no-unused-expressions": "off",
+        "no-sequences": "off",
+        "no-use-before-define": "off",
+        "no-var": "off",
+        "no-self-assign": "off",
+        eqeqeq: "off",
+        "no-void": "off",
+      },
+    },
   ],
 };
