@@ -23,8 +23,8 @@
         >
           <GoodsItem 
             :item-data="product" 
-            @add-to-cart="addToCart"
             class="product-card"
+            @add-to-cart="addToCart"
           />
         </el-col>
       </el-row>

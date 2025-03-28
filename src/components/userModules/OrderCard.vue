@@ -9,7 +9,8 @@
             </div>
         </template>
         <el-row :gutter="20">
-            <el-col v-for="(  item, index  ) in   orderStatus  " :key="index" :span="4" class="order-item"
+            <el-col
+v-for="(  item, index  ) in   orderStatus  " :key="index" :span="4" class="order-item"
                 @click="handleOrderClick(item.type)">
                 <el-badge :value="item.count" :max="99"></el-badge>
                 <p>{{ item.title }}</p>

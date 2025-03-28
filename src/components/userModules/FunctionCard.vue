@@ -1,7 +1,8 @@
 <template>
     <el-card class="function-card">
         <el-row :gutter="20">
-            <el-col v-for="(  module, index  ) in   modules  " :key="index" :span="6"
+            <el-col
+v-for="(  module, index  ) in   modules  " :key="index" :span="6"
                 @click="handleModuleClick(module.path)">
                 <div class="function-item">
                     <span :class="['iconfont', module.icon]"></span>
