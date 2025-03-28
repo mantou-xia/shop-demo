@@ -14,20 +14,23 @@
 
 <script setup>
 import { ref } from 'vue'
+import { useRouter } from 'vue-router'
+const router = useRouter()
 // import { useRouter } from 'vue-router'
 // const router = useRouter()
 
 // 功能模块数据(数据库读取)
 const modules = ref([
-    { icon: "icon-user", title: '账户资料', path: '/profile' },
-    { icon: "icon-zhanghaoanquan", title: '账户安全', path: '/security' },
-    { icon: "icon-house", title: '收货地址', path: '/address' },
-    { icon: "icon-setting", title: '账户设置', path: '/settings' }
+    { icon: "icon-user", title: '账户资料', path: '/user/profile' },
+    { icon: "icon-zhanghaoanquan", title: '账户安全', path: '/user/security' },
+    { icon: "icon-house", title: '收货地址', path: '/user/address' },
+    { icon: "icon-setting", title: '账户设置', path: '/user/settings' }
 ])
 
 const handleModuleClick = (path) => {
     console.log('跳转路径:', path)
     // 实际开发中这里应使用路由跳转
+    router.push(path)
 }
 </script>
 
