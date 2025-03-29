@@ -36,7 +36,10 @@ const orderStatus = ref([
 const handleOrderClick = (type) => {
   console.log('跳转订单类型:', type)
   // 路由跳转逻辑
-  router.push({ name: 'OrderStatus', params: { type } })
+  router.push({ 
+  name: 'OrderStatus', 
+  query: { type: 'all' }  // 改为query参数
+})
 }
 
 </script>

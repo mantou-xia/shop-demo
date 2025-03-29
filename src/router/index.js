@@ -26,29 +26,27 @@ const routes = [
         path: "/user",
         name: "user",
         component: () => import("../views/home/homeContent/HomeUser.vue"), // Update import path
-        children: [
-          {
-            path: "/user/profile",
-            name: "profile",
-            component: () => import("../views/user/userInfo/UserProfile.vue"), // Update import path
-          },
-          {
-            path: "/user/security",
-            name: "security",
-            component: () => import("../views/user/userInfo/UserSecurity.vue"), // Update import path 
-          },
-          {
-            path: "/user/address",
-            name: "address",
-            component: () => import("../views/user/userInfo/UserAddress.vue"), // Update import path 
-          },
-          {
-            path: "/user/setting",
-            name: "setting",
-            component: () => import("../views/user/userInfo/UserSetting.vue"), // Update import path 
-          }
-        ],
       },
+      {
+        path: "/user/profile",
+        name: "profile", // 必须与组件中的name对应
+        component: () => import("../views/user/userInfo/UserProfile.vue")
+      },
+      {
+        path: "/user/security",
+        name: "security",
+        component: () => import("../views/user/userInfo/UserSecurity.vue"), // Update import path 
+      },
+      {
+        path: "/user/address",
+        name: "address",
+        component: () => import("../views/user/userInfo/UserAddress.vue"), // Update import path 
+      },
+      {
+        path: "/user/setting",
+        name: "setting",
+        component: () => import("../views/user/userInfo/UserSetting.vue"), // Update import path 
+      }
     ],
   },
   {
@@ -57,10 +55,12 @@ const routes = [
     component: () => import("../views/loginAndReg/LoginAndRegView.vue"),
   },
   {
-    path: "/orders/:type", // 动态路由参数
+    path: "/orders", 
     name: "OrderStatus",
     component: () => import("../views/user/OrderStatus.vue"),
-    props: true, // 自动将参数传递给组件的 props
+    props: (route) => ({ 
+      type: route.query.type || 'all' // 从查询参数获取，默认值设为'all'
+    }),
   },
   {
     path: "/404", // 动态路由参数

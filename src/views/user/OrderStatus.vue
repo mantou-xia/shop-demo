@@ -5,26 +5,12 @@
         <el-card class="order-card">
           <el-row :gutter="10" justify="space-between">
             <el-col
-              v-for="(item, index) in orderStatus"
-              :key="index"
-              :xs="8"
-              :sm="6"
-              :md="4"
-              :lg="4"
-              :xl="4"
-              class="order-item"
-              @click="handleStatusClick(item.type)"
-            >
-              <div
-                class="status-item"
-                :class="{ active: props.type === item.type }"
-              >
+v-for="(item, index) in orderStatus" :key="index" :xs="8" :sm="6" :md="4" :lg="4" :xl="4"
+              class="order-item" @click="handleStatusClick(item.type)">
+              <div class="status-item" :class="{ active: props.type === item.type }">
                 <el-badge
-                  :value="item.count"
-                  :max="99"
-                  class="badge"
-                  :type="props.type === item.type ? 'primary' : 'info'"
-                />
+:value="item.count" :max="99" class="badge"
+                  :type="props.type === item.type ? 'primary' : 'info'" />
                 <p class="title">{{ item.title }}</p>
                 <p class="desc">{{ getStatusDesc(item.type) }}</p>
               </div>
@@ -33,18 +19,10 @@
         </el-card>
       </el-header>
       <el-main class="main">
-        <el-empty
-          v-if="filteredOrders.length === 0"
-          description="暂无订单数据"
-        />
+        <el-empty v-if="filteredOrders.length === 0" description="暂无订单数据" />
 
         <div v-else class="order-list">
-          <el-card
-            v-for="order in filteredOrders"
-            :key="order.id"
-            class="order-item-card"
-            shadow="hover"
-          >
+          <el-card v-for="order in filteredOrders" :key="order.id" class="order-item-card" shadow="hover">
             <div class="order-content">
               <img :src="order.image" class="product-image" />
               <div class="order-info">
@@ -56,25 +34,13 @@
                   <p>下单时间: {{ order.createTime }}</p>
                 </div>
                 <div class="order-actions">
-                  <el-button
-                    v-if="props.type === 'pending'"
-                    type="primary"
-                    @click="handlePay(order)"
-                  >
+                  <el-button v-if="props.type === 'pending'" type="primary" @click="handlePay(order)">
                     立即付款
                   </el-button>
-                  <el-button
-                    v-if="props.type === 'unshipped'"
-                    plain
-                    @click="handleCancel(order)"
-                  >
+                  <el-button v-if="props.type === 'unshipped'" plain @click="handleCancel(order)">
                     取消订单
                   </el-button>
-                  <el-button
-                    v-if="props.type === 'shipped'"
-                    type="success"
-                    @click="confirmReceipt(order)"
-                  >
+                  <el-button v-if="props.type === 'shipped'" type="success" @click="confirmReceipt(order)">
                     确认收货
                   </el-button>
                 </div>
@@ -89,8 +55,44 @@
 
 <script setup>
 import { watch, onMounted, ref, computed } from "vue";
-import { useRouter } from "vue-router";
+import { useRouter,onBeforeRouteUpdate } from "vue-router";
 const router = useRouter();
+
+// 修改路由跳转方式
+const handleStatusClick = (type) => {
+  router.push({
+    name: 'OrderStatus',
+    query: { type }  // 改为query参数
+  }).then(() => {
+    fetchData();
+  });
+};
+
+// 监听路由参数变化（当直接在地址栏修改type参数时触发）
+watch(
+  () => router.currentRoute.value.query.type,
+  (newType) => {
+    if (newType !== props.type) {
+      fetchData();
+    }
+  }
+);
+
+// 路由更新守卫（通过程序化导航切换type参数时触发）
+onBeforeRouteUpdate((to, from) => {
+  if (to.query.type !== from.query.type) {
+    fetchData();
+  }
+});
+
+
+// 修改props接收方式
+const props = defineProps({
+  type: {
+    type: String,
+    default: 'all'  // 添加默认值
+  }
+});
 
 const orderStatus = ref([
   { title: "待付款", count: 2, type: "pending" },
@@ -107,12 +109,6 @@ const orderStatus = ref([
   },
 ]);
 
-const props = defineProps({
-  type: {
-    type: String,
-    required: true,
-  },
-});
 
 // 模拟订单数据
 const orders = ref([
@@ -244,23 +240,6 @@ const getStatusDesc = (type) => {
   return descMap[type] || "";
 };
 
-const handleStatusClick = (type) => {
-  // 强制使用待发货的样式类
-  document.querySelectorAll(".status-item").forEach((item) => {
-    item.classList.remove("active");
-  });
-
-  // 更新路由参数
-  router
-    .push({
-      path: router.currentRoute.value.path,
-      query: { type },
-    })
-    .then(() => {
-      // 强制重新加载数据
-      fetchData();
-    });
-};
 
 const handlePay = (order) => {
   console.log("付款操作", order);
@@ -310,10 +289,10 @@ watch(
   height: auto !important;
   padding: 0;
   margin-bottom: 20px;
-  position: fixed;  
-  width: 100%;      
-  top: 0;          
-  left: 0;          
+  position: fixed;
+  width: 100%;
+  top: 0;
+  left: 0;
   z-index: 100;
   background: white;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
@@ -322,17 +301,21 @@ watch(
 .main {
   padding: 0;
   margin-top: 100px;
-  width: calc(100% - 40px); /* 与header保持一致 */
-  max-width: 1200px; /* 与header保持一致 */
+  width: calc(100% - 40px);
+  /* 与header保持一致 */
+  max-width: 1200px;
+  /* 与header保持一致 */
   margin-left: auto;
   margin-right: auto;
 }
 
 .order-list {
   display: grid;
-  grid-template-columns: repeat(2, 1fr); /* 两列布局 */
+  grid-template-columns: repeat(2, 1fr);
+  /* 两列布局 */
   gap: 20px;
 }
+
 .order-card {
   border-radius: 12px;
   border: none;
@@ -367,21 +350,21 @@ watch(
 
   &.active {
     background-color: #f0f7ff;
-    border-bottom: 2px solid #67c23a; 
+    border-bottom: 2px solid #67c23a;
     box-shadow: 0 2px 8px rgba(103, 194, 58, 0.2);
 
     .title {
-      color: #67c23a; 
+      color: #67c23a;
       font-weight: 600;
     }
 
     .desc {
-      color: #67c23a; 
+      color: #67c23a;
     }
 
     .el-badge {
       :deep(.el-badge__content) {
-        background-color: #67c23a; 
+        background-color: #67c23a;
       }
     }
   }
@@ -401,9 +384,9 @@ watch(
 }
 
 .main {
-  width: 100%;      
-  top: 0;          
-  left: 0; 
+  width: 100%;
+  top: 0;
+  left: 0;
   padding: 0;
 }
 
