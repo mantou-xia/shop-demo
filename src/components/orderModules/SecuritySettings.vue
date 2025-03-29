@@ -47,8 +47,9 @@ export default {
 
 <style scoped>
 .security-card {
-  margin: 20px;
-  max-width: 600px;
+  height: auto;
+  margin: auto;
+  max-width: 70%;
 }
 .tip-text {
   margin-left: 10px;

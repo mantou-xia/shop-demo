@@ -1,7 +1,9 @@
 <template>
   <!-- 页面主体 -->
   <div class="main-content">
-    <SubNavModule1 />
+
+    <!-- <SubNavModule1 />-->
+
     <!-- 商品展示区 -->
     <div class="product-area">
       <!-- 轮播图 -->
@@ -37,7 +39,7 @@ import { defineComponent } from 'vue'
 import {
   ElCarousel, ElCarouselItem, ElRow
 } from 'element-plus'
-import SubNavModule1 from '../../../components/subNavModule1/SubNavModule1.vue'
+/** * import SubNavModule1 from '../../../components/subNavModule1/SubNavModule1.vue' ***/
 import GoodsItem from '../../../components/goodsItem/GoodsItem.vue'
 
 export default defineComponent({
@@ -45,7 +47,7 @@ export default defineComponent({
     ElCarousel,
     ElCarouselItem,
     ElRow,
-    SubNavModule1,
+    // SubNavModule1,
     GoodsItem // 组件注册应在此处统一完成
   },
   setup() {

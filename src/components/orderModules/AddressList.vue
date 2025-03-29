@@ -43,7 +43,18 @@ export default {
   props: {
     addressList: {
       type: Array,
-      default: () => []
+      default: () => [
+        {
+          recipient: '张三',
+          phone: '13812345678',
+          address: '北京市朝阳区建国路100号'
+        },
+        {
+          recipient: '李四',
+          phone: '13987654321',
+          address: '上海市浦东新区陆家嘴环路200号'
+        }
+      ]
     }
   },
   data() {
@@ -100,7 +111,8 @@ export default {
 
 <style scoped>
 .address-card {
-  margin: 20px;
+  height: auto;
+  margin: auto;;
   max-width: 1000px;
 }
 </style>

@@ -3,7 +3,7 @@
     <el-row :gutter="20">
       <el-col :span="4">
         <!-- 搜索框 -->
-        <SearchInput @search="handleSearch" />
+        <!--<SearchInput @search="handleSearch" />-->
         <el-menu
 class="mi-menu" default-active="1" mode="vertical" :background-color="menuBackground"
           :text-color="menuText" :active-text-color="activeColor" @select="handleSelect">
@@ -59,7 +59,7 @@ import {
   ElMenu,
   ElMenuItem
 } from 'element-plus'
-import SearchInput from '../../../components/SearchInput.vue'
+// import SearchInput from '../../../components/SearchInput.vue'
 import GoodsItem from '../../../components/goodsItem/GoodsItem.vue'
 // vue3 中的 setup 语法糖不需要注册组件
 
@@ -72,9 +72,9 @@ const handleSelect = (key) => {
   console.log('选中分类:', key)
 }
 
-const handleSearch = (data) => {
+/** *const handleSearch = (data) => {
   console.log('收到搜索关键词:', data)
-}
+}* **/
 </script>
 
 <style lang="scss" scoped>

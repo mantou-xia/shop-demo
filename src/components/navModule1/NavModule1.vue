@@ -8,60 +8,71 @@
     class="nav-menu"
     :router="true"
   >
-    <el-menu-item index="/home">
-      首页
-    </el-menu-item>
-    <el-menu-item index="/category">
-      商品分类
-    </el-menu-item>
-    <el-menu-item index="/cart">
-      购物车
-    </el-menu-item>
-    <el-menu-item index="/user">
-      我的账户
-    </el-menu-item>
+    <!-- 新增网站Logo -->
+    <img 
+      src="@/assets/logo.png" 
+      class="nav-logo"
+      alt="网站Logo"
+    />
+    <el-menu-item index="/home"> 首页 </el-menu-item>
+    <el-menu-item index="/category"> 商品分类 </el-menu-item>
+    <el-menu-item index="/cart"> 购物车 </el-menu-item>
+    <el-menu-item index="/user"> 我的账户 </el-menu-item>
+    <SearchInput class="search-input"  @search="handleSearch"/>
 
     <div style="flex-grow: 1" />
-    <el-menu-item
-      index="/loginAndReg"
-      @click="handleLogin"
-    >
+    <el-menu-item index="/loginAndReg" @click="handleLogin">
       登录
     </el-menu-item>
-    <el-menu-item
-      index="/loginAndReg"
-      @click="handleRegister"
-    >
+    <el-menu-item index="/loginAndReg" @click="handleRegister">
       注册
     </el-menu-item>
   </el-menu>
 </template>
 
 <script setup>
+import SearchInput from "../../components/SearchInput.vue";
+
+const handleSearch = (data) => {
+  console.log("收到搜索关键词:", data);
+};
 // 新增登录注册方法
 const handleLogin = () => {
-  console.log('打开登录弹窗')
+  console.log("打开登录弹窗");
   // 这里可以添加登录逻辑
-}
+};
 
 const handleRegister = () => {
-  console.log('打开注册页面')
+  console.log("打开注册页面");
   // 这里可以添加注册逻辑
-}
+};
 </script>
 
 <style scoped lang="scss">
 .nav-menu {
-    position: fixed;
-    left: 0;
-    top: 0;
-    width: 100%;
-    z-index: 1000;
-    display: flex; /* 启用flex布局 */
+  // 新增Logo样式
+  .nav-logo {
+    position: relative;
+    top: 10px; /* 调整Logo的垂直位置 */
+    margin-left: 20px;
+    width: 40px;
+    height: 40px;
+  }
+  
+  .search-input {
+    margin: auto;
+    margin-left: 400px;
+  }
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
+  display: flex; /* 启用flex布局 */
 
-    /* 新增按钮间距 */
-    :deep(.el-menu-item) {
-        margin-left: 10px;
-    }
+  /* 新增按钮间距 */
+  :deep(.el-menu-item) {
+    margin-left: 10px;
+  }
 }
 </style>

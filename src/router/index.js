@@ -62,11 +62,26 @@ const routes = [
       type: route.query.type || 'all' // 从查询参数获取，默认值设为'all'
     }),
   },
+  /** *{
+    path: "/good", 
+    name: "good",
+    component: () => import("../views/goods/Good.vue"),
+    props: (route) => ({ 
+      type: route.query.id || '0' // 从查询参数获取，默认值设为'all'
+    }),
+  },   
+  这是你自己写的，下面是新的good的router，看情况选择* **/
   {
-    path: "/404", // 动态路由参数
-    name: "error",
-    component: () => import("../views/error/Error.vue"),
-  },
+    path: '/error',
+    name: 'Error',
+    component: () => import('../views/error/Error.vue')  // 将 @ 别名改为相对路径
+},
+{
+    path: '/goods/:id',
+    name: 'Good',
+    component: () => import('../views/goods/Good.vue'),  // 路径保持一致
+    props: true
+},
 ];
 
 const router = createRouter({
