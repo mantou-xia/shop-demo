@@ -5,26 +5,20 @@
         <!-- 搜索框 -->
         <!--<SearchInput @search="handleSearch" />-->
         <el-menu
-class="mi-menu" default-active="1" mode="vertical" :background-color="menuBackground"
-          :text-color="menuText" :active-text-color="activeColor" @select="handleSelect">
-          <el-menu-item index="1">
-            种类1
-          </el-menu-item>
-          <el-menu-item index="2">
-            种类2
-          </el-menu-item>
-          <el-menu-item index="3">
-            种类3
-          </el-menu-item>
-          <el-menu-item index="4">
-            种类4
-          </el-menu-item>
-          <el-menu-item index="5">
-            种类5
-          </el-menu-item>
-          <el-menu-item index="6">
-            种类6
-          </el-menu-item>
+          class="mi-menu"
+          default-active="1"
+          mode="vertical"
+          :background-color="menuBackground"
+          :text-color="menuText"
+          :active-text-color="activeColor"
+          @select="handleSelect"
+        >
+          <el-menu-item index="1"> 种类1 </el-menu-item>
+          <el-menu-item index="2"> 种类2 </el-menu-item>
+          <el-menu-item index="3"> 种类3 </el-menu-item>
+          <el-menu-item index="4"> 种类4 </el-menu-item>
+          <el-menu-item index="5"> 种类5 </el-menu-item>
+          <el-menu-item index="6"> 种类6 </el-menu-item>
         </el-menu>
       </el-col>
 
@@ -33,17 +27,26 @@ class="mi-menu" default-active="1" mode="vertical" :background-color="menuBackgr
         <!-- 商品展示区 -->
         <div class="goods-showcase">
           <el-row :gutter="20">
-            <el-col v-for="item in 8" :key="item" :xs="12" :sm="8" :md="6" class="goods-item" @click="handleGoodsClick(item)">
+            <el-col
+              v-for="item in 8"
+              :key="item"
+              :xs="12"
+              :sm="8"
+              :md="6"
+              class="goods-item"
+              @click="handleGoodsClick(item)"
+            >
               <GoodsItem
-:item-data="{
-      id: item, // 新增商品ID字段
-      image: `https://picsum.photos/1200/300?random=${item}`,
-      title: `商品 ${item}`,
-      desc: '高端旗舰 年度新品',
-      currentPrice: 1999 + item,
-      originalPrice: 2999 + item,
-      promoTag: '新品'
-    }" />
+                :item-data="{
+                  id: item, // 新增商品ID字段
+                  image: `https://picsum.photos/1200/300?random=${item}`,
+                  title: `商品 ${item}`,
+                  desc: '高端旗舰 年度新品',
+                  currentPrice: 1999 + item,
+                  originalPrice: 2999 + item,
+                  promoTag: '新品',
+                }"
+              />
             </el-col>
           </el-row>
         </div>
@@ -53,37 +56,32 @@ class="mi-menu" default-active="1" mode="vertical" :background-color="menuBackgr
 </template>
 
 <script setup>
-import { ref } from 'vue'
-import { useRouter } from 'vue-router' // 新增路由导入
-import {
-  ElRow,
-  ElCol,
-  ElMenu,
-  ElMenuItem
-} from 'element-plus'
+import { ref } from "vue";
+import { useRouter } from "vue-router"; // 新增路由导入
+import { ElRow, ElCol, ElMenu, ElMenuItem } from "element-plus";
 // import SearchInput from '../../../components/SearchInput.vue'
-import GoodsItem from '../../../components/goodsItem/GoodsItem.vue'
+import GoodsItem from "../../../components/goodsItem/GoodsItem.vue";
 // vue3 中的 setup 语法糖不需要注册组件
 
 // 小米主题色
-const menuBackground = ref('#ffffff')
-const menuText = ref('#333')
-const activeColor = ref('#ff6700')
+const menuBackground = ref("#ffffff");
+const menuText = ref("#333");
+const activeColor = ref("#ff6700");
 
 const handleSelect = (key) => {
-  console.log('选中分类:', key)
-}
+  console.log("选中分类:", key);
+};
 
 /** *const handleSearch = (data) => {
   console.log('收到搜索关键词:', data)
 }* **/
 
-const router = useRouter() // 获取路由实例
+const router = useRouter(); // 获取路由实例
 
 // 新增商品点击处理
 const handleGoodsClick = (id) => {
-  router.push(`/goods/${id}`) // 根据ID跳转到商品详情页
-}
+  router.push(`/goods/${id}`); // 根据ID跳转到商品详情页
+};
 </script>
 
 <style lang="scss" scoped>

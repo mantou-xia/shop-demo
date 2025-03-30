@@ -12,7 +12,7 @@
     "@vueuse/core": "^13.0.0",
     "axios": "^1.8.4",
     "core-js": "^3.8.3",
-    "element-plus": "^1.0.1-alpha.19",
+    "element-plus": "latest",
     "lodash": "^4.17.21",
     "naive-ui": "^2.41.0",
     "pinia": "^3.0.1",

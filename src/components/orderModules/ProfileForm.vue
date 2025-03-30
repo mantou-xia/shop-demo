@@ -121,6 +121,7 @@ export default {
   text-align: center;
 }
 .profile-card {
+  width: 100%;
   height: auto;
   margin: auto;
   max-width: 70%;

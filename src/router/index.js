@@ -82,6 +82,15 @@ const routes = [
     component: () => import('../views/goods/Good.vue'),  // 路径保持一致
     props: true
 },
+{
+  path: '/checkout',
+  name: 'Checkout',
+  component: () => import('@/views/checkout/CheckOut.vue'),
+  props: (route) => ({
+    productId: route.query.productId,
+    spec: route.query.spec
+  })
+},
 ];
 
 const router = createRouter({
