@@ -33,9 +33,10 @@ class="mi-menu" default-active="1" mode="vertical" :background-color="menuBackgr
         <!-- 商品展示区 -->
         <div class="goods-showcase">
           <el-row :gutter="20">
-            <el-col v-for="item in 8" :key="item" :xs="12" :sm="8" :md="6" class="goods-item">
+            <el-col v-for="item in 8" :key="item" :xs="12" :sm="8" :md="6" class="goods-item" @click="handleGoodsClick(item)">
               <GoodsItem
 :item-data="{
+      id: item, // 新增商品ID字段
       image: `https://picsum.photos/1200/300?random=${item}`,
       title: `商品 ${item}`,
       desc: '高端旗舰 年度新品',
@@ -53,6 +54,7 @@ class="mi-menu" default-active="1" mode="vertical" :background-color="menuBackgr
 
 <script setup>
 import { ref } from 'vue'
+import { useRouter } from 'vue-router' // 新增路由导入
 import {
   ElRow,
   ElCol,
@@ -75,6 +77,13 @@ const handleSelect = (key) => {
 /** *const handleSearch = (data) => {
   console.log('收到搜索关键词:', data)
 }* **/
+
+const router = useRouter() // 获取路由实例
+
+// 新增商品点击处理
+const handleGoodsClick = (id) => {
+  router.push(`/goods/${id}`) // 根据ID跳转到商品详情页
+}
 </script>
 
 <style lang="scss" scoped>
