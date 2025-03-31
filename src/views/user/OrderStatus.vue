@@ -1,52 +1,38 @@
 <template>
   <div class="common-layout">
     <el-container>
-      <el-header class="header">
-        <el-card class="order-card">
-          <el-row :gutter="10" justify="space-between">
-            <el-col
-v-for="(item, index) in orderStatus" :key="index" :xs="8" :sm="6" :md="4" :lg="4" :xl="4"
-              class="order-item" @click="handleStatusClick(item.type)">
-              <div class="status-item" :class="{ active: props.type === item.type }">
-                <el-badge
-:value="item.count" :max="99" class="badge"
-                  :type="props.type === item.type ? 'primary' : 'info'" />
-                <p class="title">{{ item.title }}</p>
-                <p class="desc">{{ getStatusDesc(item.type) }}</p>
-              </div>
-            </el-col>
-          </el-row>
-        </el-card>
+      <el-header>
+        <NavModule1 />
       </el-header>
       <el-main class="main">
+        <div class="order-select">
+          <el-card class="order-card">
+            <el-row :gutter="10" justify="space-between">
+              <el-col v-for="(item, index) in orderStatus" :key="index" :xs="8" :sm="6" :md="4" :lg="4" :xl="4"
+                class="order-item" @click="handleStatusClick(item.type)">
+                <div class="status-item" :class="{ active: props.type === item.type }">
+                  <el-badge :value="item.count" :max="99" class="badge"
+                    :type="props.type === item.type ? 'primary' : 'info'" />
+                  <p class="title">{{ item.title }}</p>
+                  <p class="desc">{{ getStatusDesc(item.type) }}</p>
+                </div>
+              </el-col>
+            </el-row>
+          </el-card>
+        </div>
+
         <el-empty v-if="filteredOrders.length === 0" description="暂无订单数据" />
 
         <div v-else class="order-list">
-          <el-card v-for="order in filteredOrders" :key="order.id" class="order-item-card" shadow="hover">
-            <div class="order-content">
-              <img :src="order.image" class="product-image" />
-              <div class="order-info">
-                <h3>{{ order.name }}</h3>
-                <div class="order-details">
-                  <p>订单号: {{ order.orderNo }}</p>
-                  <p>价格: ¥{{ order.price }}</p>
-                  <p>数量: {{ order.quantity }}</p>
-                  <p>下单时间: {{ order.createTime }}</p>
-                </div>
-                <div class="order-actions">
-                  <el-button v-if="props.type === 'pending'" type="primary" @click="handlePay(order)">
-                    立即付款
-                  </el-button>
-                  <el-button v-if="props.type === 'unshipped'" plain @click="handleCancel(order)">
-                    取消订单
-                  </el-button>
-                  <el-button v-if="props.type === 'shipped'" type="success" @click="confirmReceipt(order)">
-                    确认收货
-                  </el-button>
-                </div>
-              </div>
-            </div>
-          </el-card>
+          <OrderItem
+            v-for="order in filteredOrders"
+            :key="order.id"
+            :order="order"
+            :type="props.type"
+            @pay="handlePay"
+            @cancel="handleCancel"
+            @confirm="confirmReceipt"
+          />
         </div>
       </el-main>
     </el-container>
@@ -55,7 +41,9 @@ v-for="(item, index) in orderStatus" :key="index" :xs="8" :sm="6" :md="4" :lg="4
 
 <script setup>
 import { watch, onMounted, ref, computed } from "vue";
-import { useRouter,onBeforeRouteUpdate } from "vue-router";
+import { useRouter, onBeforeRouteUpdate } from "vue-router";
+import NavModule1 from "../../components/navModule1/NavModule1";
+import OrderItem from "../../components/orderItem/OrderItem";
 const router = useRouter();
 
 // 修改路由跳转方式
@@ -285,13 +273,13 @@ watch(
   padding: 20px;
 }
 
-.header {
+.order-select {
   height: auto !important;
   padding: 0;
   margin-bottom: 20px;
   position: fixed;
   width: 100%;
-  top: 0;
+  top: 50px;
   left: 0;
   z-index: 100;
   background: white;
@@ -300,20 +288,20 @@ watch(
 
 .main {
   padding: 0;
-  margin-top: 100px;
+  margin-top: 150px;
   width: calc(100% - 40px);
   /* 与header保持一致 */
-  max-width: 1200px;
+  min-width: 1200px;
   /* 与header保持一致 */
   margin-left: auto;
   margin-right: auto;
 }
 
 .order-list {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  /* 两列布局 */
+  display: flex;
+  flex-direction: column;
   gap: 20px;
+  width: 100%;
 }
 
 .order-card {

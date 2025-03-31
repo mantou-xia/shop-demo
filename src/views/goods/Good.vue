@@ -4,12 +4,16 @@
     <!-- 商品主图与基本信息 -->
     <el-row :gutter="40" class="main-section">
       <el-col :span="12">
-        <el-image
-          :src="goodInfo.mainImage"
-          :preview-src-list="goodInfo.imageList"
-          fit="contain"
-          class="main-image"
-        >
+        <el-image :src="goodInfo.mainImage" :preview-src-list="goodInfo.imageList" fit="contain" class="main-image" lazy
+          :loading="isLoading">
+          <template #loading>
+            <div class="image-loading">
+              <el-icon class="is-loading">
+                <Loading />
+              </el-icon>
+              <span>图片加载中...</span>
+            </div>
+          </template>
           <template #error>
             <div class="image-error">图片加载失败</div>
           </template>
@@ -27,12 +31,7 @@
         <div class="spec-section">
           <h3>规格选择</h3>
           <el-radio-group v-model="selectedSpec">
-            <el-radio
-              v-for="spec in goodInfo.specs"
-              :key="spec"
-              :label="spec"
-              border
-            >
+            <el-radio v-for="spec in goodInfo.specs" :key="spec" :label="spec" border>
               {{ spec }}
             </el-radio>
           </el-radio-group>
@@ -40,9 +39,7 @@
 
         <!-- 操作按钮 -->
         <div class="action-buttons">
-          <el-button type="danger" @click="handleAddToCart"
-            >加入购物车</el-button
-          >
+          <el-button type="danger" @click="handleAddToCart">加入购物车</el-button>
           <el-button type="warning" @click="handleBuyNow">立即购买</el-button>
         </div>
       </el-col>
@@ -127,7 +124,7 @@ const handleBuyNow = () => {
 
 <style lang="scss" scoped>
 .goods-detail {
-  max-width: 1200px;
+  min-width: 1200px;
   margin: 20px auto;
   padding: 20px;
   background: white;
@@ -138,8 +135,11 @@ const handleBuyNow = () => {
     padding: 20px 0;
 
     .main-image {
+      // todo 后面调整大小
       width: 100%;
       height: 500px;
+      min-width: 500px;
+      min-height: 500px;
       border: 1px solid #eee;
       border-radius: 4px;
     }
@@ -152,11 +152,13 @@ const handleBuyNow = () => {
 
   .price-section {
     margin: 20px 0;
+
     .current-price {
       font-size: 28px;
       color: #ff6700;
       margin-right: 10px;
     }
+
     .original-price {
       font-size: 16px;
       color: #999;

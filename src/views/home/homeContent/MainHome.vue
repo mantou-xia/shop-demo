@@ -53,6 +53,7 @@ export default defineComponent({
   setup() {
     // 示例商品数据
     const products = Array.from({ length: 8 }, (_, i) => ({
+      id: i + 1,
       title: `商品 ${i + 1}`,
       desc: '高端旗舰 年度新品',
       currentPrice: (Math.random() * 1000).toFixed(2),

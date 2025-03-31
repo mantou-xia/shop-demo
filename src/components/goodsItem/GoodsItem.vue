@@ -1,7 +1,16 @@
 <template>
-  <div class="goods-item">
+  <div class="goods-item" @click="handleGoodsClick(itemData.id)">
     <div class="image-container">
-      <el-image :src="itemData.image" fit="cover" class="goods-image" />
+      <el-image :src="itemData.image" fit="cover" class="goods-image" lazy :loading="isLoading">
+        <template #loading>
+          <div class="image-loading">
+            <el-icon class="is-loading">
+              <Loading />
+            </el-icon>
+            <span>图片加载中...</span>
+          </div>
+        </template>
+      </el-image>
       <span v-if="itemData.promoTag" class="promo-tag">{{ itemData.promoTag }}</span>
     </div>
     <div class="goods-info">
@@ -16,10 +25,12 @@
 </template>
 
 <script setup>
+import { useRouter } from "vue-router";
 const { itemData } = defineProps({
   itemData: {
     type: Object,
     default: () => ({
+      id: '',             // 商品ID（必须）
       image: '',          // 商品图片URL
       title: '默认商品',   // 商品标题（默认值）
       desc: '',           // 商品描述/副标题
@@ -29,6 +40,13 @@ const { itemData } = defineProps({
     })
   }
 })
+
+const router = useRouter(); // 获取路由实例
+
+// 新增商品点击处理
+const handleGoodsClick = (id) => {
+  router.push(`/goods/${id}`); // 根据ID跳转到商品详情页
+};
 </script>
 
 <style lang="scss" scoped>
@@ -39,6 +57,7 @@ const { itemData } = defineProps({
   overflow: hidden;
   transition: all 0.3s;
   cursor: pointer;
+
   &:hover {
     transform: translateY(-5px);
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);

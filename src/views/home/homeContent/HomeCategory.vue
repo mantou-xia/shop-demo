@@ -34,7 +34,6 @@
               :sm="8"
               :md="6"
               class="goods-item"
-              @click="handleGoodsClick(item)"
             >
               <GoodsItem
                 :item-data="{
@@ -57,9 +56,7 @@
 
 <script setup>
 import { ref } from "vue";
-import { useRouter } from "vue-router"; // 新增路由导入
 import { ElRow, ElCol, ElMenu, ElMenuItem } from "element-plus";
-// import SearchInput from '../../../components/SearchInput.vue'
 import GoodsItem from "../../../components/goodsItem/GoodsItem.vue";
 // vue3 中的 setup 语法糖不需要注册组件
 
@@ -76,12 +73,6 @@ const handleSelect = (key) => {
   console.log('收到搜索关键词:', data)
 }* **/
 
-const router = useRouter(); // 获取路由实例
-
-// 新增商品点击处理
-const handleGoodsClick = (id) => {
-  router.push(`/goods/${id}`); // 根据ID跳转到商品详情页
-};
 </script>
 
 <style lang="scss" scoped>
